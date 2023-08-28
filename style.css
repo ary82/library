@@ -1,0 +1,20 @@
+/* Add a css reset */
+@import url("./normalize.css");
+
+/* Specify colors */
+:root {
+  --light-clr: ;
+  --dark-alt1: ;
+  --accent1-clr: ;
+  --accent2-clr: ;
+  --font-stack: font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+/* Add External Font */
+@font-face {
+  font-family: "";
+  src: url("") format("woff2");
+  font-weight: range;
+  font-display: swap;
+}
