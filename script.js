@@ -21,3 +21,24 @@ book.prototype = {
 };
 const stranger = new book("The stranger", "Albert Camus", 171, "read");
 console.log(lib);
+
+function addBook() {
+  let newdiv = document.createElement("div");
+  const bookname = document.createElement("h2");
+  bookname.innerText = stranger.title;
+  newdiv.appendChild(bookname);
+  const author = document.createElement("h2");
+  author.innerText = stranger.author;
+  newdiv.appendChild(author);
+  const pages = document.createElement("p");
+  pages.innerText = stranger.pg;
+  newdiv.appendChild(pages);
+  const read_btn = document.createElement("button");
+  read_btn.innerText = "Read this";
+  newdiv.appendChild(read_btn);
+  const remove_btn = document.createElement("button");
+  remove_btn.innerText = "remove this";
+  newdiv.appendChild(remove_btn);
+  document.getElementById("container").appendChild(newdiv);
+}
+addBook();
