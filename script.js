@@ -5,8 +5,9 @@ const close_modal = document.querySelector("dialog > svg");
 const modal = document.getElementById("popup");
 let lib = (JSON.parse(localStorage.getItem("lib"))) || [];
 let remove_buttons = document.querySelectorAll(".remove_btn");
+let toggle_btn = document.querySelectorAll(".toggle");
 display_books();
-updateRemoveButtons();
+updateButtons();
 
 // Book constructor
 function book(title, author, pg, read) {
@@ -47,19 +48,27 @@ function display_books() {
     newdiv.appendChild(pages);
     const read_btn = document.createElement("button");
     read_btn.classList.add("toggle");
-    read_btn.innerText = "Read this";
+    if (element.read) {
+      read_btn.innerText = "Read";
+      read_btn.classList.add("read");
+    } else {
+      read_btn.innerText = "Not Read";
+      read_btn.classList.add("notread");
+    }
     newdiv.appendChild(read_btn);
     const remove_btn = document.createElement("button");
     remove_btn.classList.add("remove_btn");
     remove_btn.innerText = "Remove";
     newdiv.appendChild(remove_btn);
     container.appendChild(newdiv);
-    updateRemoveButtons();
+    updateButtons();
   });
   addRemoveButtonListeners();
+  addToggleButtonListeners();
 }
-function updateRemoveButtons() {
+function updateButtons() {
   remove_buttons = document.querySelectorAll(".remove_btn");
+  toggle_btn = document.querySelectorAll(".toggle");
 }
 function addRemoveButtonListeners() {
   remove_buttons.forEach((element) => {
@@ -69,10 +78,34 @@ function addRemoveButtonListeners() {
         if (obj.title === element.parentNode.firstChild.innerText) {
           removefromlib(obj);
           display_books();
-          updateRemoveButtons();
+          updateButtons();
           localStorage.setItem("lib", JSON.stringify(lib));
         }
       });
+    });
+  });
+}
+function addToggleButtonListeners() {
+  toggle_btn.forEach((element) => {
+    element.addEventListener("click", () => {
+      if (element.classList.contains("read")) {
+        element.classList.remove("read");
+        lib.forEach((obj) => {
+          if (obj.title === element.parentNode.firstChild.innerText) {
+            obj.read = false;
+          }
+        });
+      } else {
+        element.classList.add("read");
+        lib.forEach((obj) => {
+          if (obj.title === element.parentNode.firstChild.innerText) {
+            obj.read = true;
+          }
+        });
+      }
+      display_books();
+      updateButtons();
+      localStorage.setItem("lib", JSON.stringify(lib));
     });
   });
 }
