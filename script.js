@@ -42,3 +42,32 @@ function addBook() {
   document.getElementById("container").appendChild(newdiv);
 }
 addBook();
+
+const add_btn = document.getElementById("add_btn");
+const close_modal = document.querySelector("dialog > svg");
+const modal = document.getElementById("popup");
+add_btn.addEventListener("click", () => {
+  modal.showModal();
+});
+close_modal.addEventListener("click", () => {
+  modal.close();
+});
+
+const form = document.querySelector("form");
+form.addEventListener("submit", (e) => {
+  let form_title = document.getElementById("title");
+  let form_author = document.getElementById("author");
+  let form_pages = document.getElementById("num_pages");
+  let form_read_unread = document.getElementById("read-unread");
+  new book(
+    form_title.value,
+    form_author.value,
+    form_pages.value,
+    form_read_unread.checked,
+  );
+  form_title.value = "";
+  form_author.value = "";
+  form_pages.value = "";
+  form_read_unread.checked = false;
+  console.log(lib);
+});
