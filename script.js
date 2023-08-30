@@ -4,7 +4,9 @@ const add_btn = document.getElementById("add_btn");
 const close_modal = document.querySelector("dialog > svg");
 const modal = document.getElementById("popup");
 let lib = (JSON.parse(localStorage.getItem("lib"))) || [];
+let remove_buttons = document.querySelectorAll(".remove_btn");
 display_books();
+updateRemoveButtons();
 
 // Book constructor
 function book(title, author, pg, read) {
@@ -24,13 +26,12 @@ book.prototype = {
   addtolib: function () {
     lib.push(this);
   },
-  removefromlib: function () {
-    lib.splice(lib.indexOf(this), 1);
-  },
 };
-console.log(lib);
 
 // Utility functions
+function removefromlib(param) {
+  lib.splice(lib.indexOf(param), 1);
+}
 function display_books() {
   container.innerText = "";
   lib.forEach((element) => {
@@ -45,17 +46,36 @@ function display_books() {
     pages.innerText = "Pages: " + element.pg;
     newdiv.appendChild(pages);
     const read_btn = document.createElement("button");
-    read_btn.classList.add("toggle")
+    read_btn.classList.add("toggle");
     read_btn.innerText = "Read this";
     newdiv.appendChild(read_btn);
     const remove_btn = document.createElement("button");
-    remove_btn.classList.add("remove_btn")
+    remove_btn.classList.add("remove_btn");
     remove_btn.innerText = "Remove";
     newdiv.appendChild(remove_btn);
     container.appendChild(newdiv);
+    updateRemoveButtons();
+  });
+  addRemoveButtonListeners();
+}
+function updateRemoveButtons() {
+  remove_buttons = document.querySelectorAll(".remove_btn");
+}
+function addRemoveButtonListeners() {
+  remove_buttons.forEach((element) => {
+    element.addEventListener("click", () => {
+      lib.forEach((obj) => {
+        console.log(obj);
+        if (obj.title === element.parentNode.firstChild.innerText) {
+          removefromlib(obj);
+          display_books();
+          updateRemoveButtons();
+          localStorage.setItem("lib", JSON.stringify(lib));
+        }
+      });
+    });
   });
 }
-
 // Event Listeners for popup
 add_btn.addEventListener("click", () => {
   modal.showModal();
@@ -81,7 +101,6 @@ form.addEventListener("submit", () => {
   form_pages.value = "";
   form_read_unread.checked = false;
   localStorage.setItem("lib", JSON.stringify(lib));
-
   console.log(lib);
   display_books();
 });
