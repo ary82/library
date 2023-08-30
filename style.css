@@ -32,12 +32,18 @@ h1 {
   font-style: italic;
 }
 #add_btn {
-  font-size: 1.2rem;
-  border-radius: 0.5rem;
-  min-width: auto;
-  padding: 1rem 2rem;
-  margin: 1rem auto;
+  font-size: 1.5rem;
   display: block;
+  padding: 1rem 0;
+  margin: 1rem auto;
+  background-color: var(--bg-clr);
+  border: 1px solid var(--text-clr);
+  border-radius: 5px;
+  width: 40%;
+  cursor: pointer;
+}
+#add_btn:hover{
+  transform: scale(1.03);
 }
 #container {
   margin: 1rem 8vw;
@@ -73,10 +79,53 @@ button {
   font-size: 1.2rem;
   border-radius: 1rem;
   min-width: 50%;
+  transition: transform ease-in-out 125ms;
+  background-color: var(--bg-clr);
+  border: 1px solid rgb(0 0 0 / 0.4);
+}
+button:hover {
+  transform: scale(1.05);
+  background-color: var(--bg-clr);
 }
 .read {
   border: 2px solid var(--accent1-clr);
 }
 .not-read {
   border: 2px solid var(--accent2-clr);
+}
+
+dialog {
+  border-radius: 0.8rem;
+  background-color: var(--bg-light);
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+form > div {
+  display: flex;
+}
+form > div > * {
+  min-width: 50%;
+  font-size: 1.1rem;
+}
+form button {
+  align-self: center;
+  padding: 0.5rem 2.5rem;
+}
+form > h2 {
+  padding: 0.8rem 0;
+  font-size: 1.8rem;
+}
+dialog > svg {
+  width: 2.5rem;
+  height: 2.5rem;
+  position: absolute;
+  right: 1.2rem;
+  top: 1.62rem;
+  cursor: pointer;
+}
+input[type="checkbox"] {
+  accent-color: currentColor;
 }
