@@ -39,10 +39,8 @@ h1 {
   background-color: var(--bg-clr);
   border: 1px solid var(--text-clr);
   border-radius: 5px;
-  width: 40%;
-  cursor: pointer;
 }
-#add_btn:hover{
+#add_btn:hover {
   transform: scale(1.03);
 }
 #container {
@@ -60,7 +58,7 @@ h1 {
   align-items: center;
   border-radius: 0.5rem;
   background-color: var(--bg-light);
-  border: 2px solid var(--accent1-clr);
+  border: 2px solid gray;
   gap: 1rem;
   padding: 1.5rem;
   box-shadow: 0px 0px 3px gray;
@@ -82,18 +80,13 @@ button {
   transition: transform ease-in-out 125ms;
   background-color: var(--bg-clr);
   border: 1px solid rgb(0 0 0 / 0.4);
+  padding: 0.5rem;
+  cursor: pointer;
 }
 button:hover {
   transform: scale(1.05);
   background-color: var(--bg-clr);
 }
-.read {
-  border: 2px solid var(--accent1-clr);
-}
-.not-read {
-  border: 2px solid var(--accent2-clr);
-}
-
 dialog {
   border-radius: 0.8rem;
   background-color: var(--bg-light);
@@ -128,4 +121,10 @@ dialog > svg {
 }
 input[type="checkbox"] {
   accent-color: currentColor;
+}
+.read {
+  border: 2px solid var(--accent2-clr);
+}
+.notread {
+  border: 2px solid var(--accent1-clr);
 }
