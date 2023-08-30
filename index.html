@@ -48,5 +48,34 @@
         <button class="read">remove</button>
       </div>
     </div>
+    <dialog id="popup">
+      <form method="dialog">
+        <h2>Add Book</h2>
+        <div>
+          <label for="title">Title: </label>
+          <input type="text" id="title" name="title" required />
+        </div>
+        <div>
+          <label for="author">Author: </label>
+          <input type="text" id="author" name="author" required />
+        </div>
+        <div>
+          <label for="num_pages">Number of pages: </label>
+          <input type="number" id="num_pages" name="number-of-pages" required />
+        </div>
+        <div>
+          <label for="read-unread">Read? </label>
+          <input type="checkbox" id="read-unread" name="Read-or-Unread" />
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path
+          fill="currentColor"
+          d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+        />
+      </svg>
+    </dialog>
   </body>
 </html>
