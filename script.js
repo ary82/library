@@ -1,4 +1,12 @@
-let lib = [];
+const container = document.getElementById("container");
+const form = document.querySelector("form");
+const add_btn = document.getElementById("add_btn");
+const close_modal = document.querySelector("dialog > svg");
+const modal = document.getElementById("popup");
+let lib = (JSON.parse(localStorage.getItem("lib"))) || [];
+display_books();
+
+// Book constructor
 function book(title, author, pg, read) {
   this.title = title;
   this.author = author;
@@ -7,6 +15,7 @@ function book(title, author, pg, read) {
   this.addtolib();
 }
 
+// Add prototype functions
 book.prototype = {
   info: function () {
     return (this.title + " by " + this.author + ", " + this.pg + " pages, " +
@@ -19,33 +28,35 @@ book.prototype = {
     lib.splice(lib.indexOf(this), 1);
   },
 };
-const stranger = new book("The stranger", "Albert Camus", 171, "read");
 console.log(lib);
 
-function addBook() {
-  let newdiv = document.createElement("div");
-  const bookname = document.createElement("h2");
-  bookname.innerText = stranger.title;
-  newdiv.appendChild(bookname);
-  const author = document.createElement("h2");
-  author.innerText = stranger.author;
-  newdiv.appendChild(author);
-  const pages = document.createElement("p");
-  pages.innerText = stranger.pg;
-  newdiv.appendChild(pages);
-  const read_btn = document.createElement("button");
-  read_btn.innerText = "Read this";
-  newdiv.appendChild(read_btn);
-  const remove_btn = document.createElement("button");
-  remove_btn.innerText = "remove this";
-  newdiv.appendChild(remove_btn);
-  document.getElementById("container").appendChild(newdiv);
+// Utility functions
+function display_books() {
+  container.innerText = "";
+  lib.forEach((element) => {
+    let newdiv = document.createElement("div");
+    const bookname = document.createElement("h2");
+    bookname.innerText = element.title;
+    newdiv.appendChild(bookname);
+    const author = document.createElement("h2");
+    author.innerText = "-" + element.author;
+    newdiv.appendChild(author);
+    const pages = document.createElement("p");
+    pages.innerText = "Pages: " + element.pg;
+    newdiv.appendChild(pages);
+    const read_btn = document.createElement("button");
+    read_btn.classList.add("toggle")
+    read_btn.innerText = "Read this";
+    newdiv.appendChild(read_btn);
+    const remove_btn = document.createElement("button");
+    remove_btn.classList.add("remove_btn")
+    remove_btn.innerText = "Remove";
+    newdiv.appendChild(remove_btn);
+    container.appendChild(newdiv);
+  });
 }
-addBook();
 
-const add_btn = document.getElementById("add_btn");
-const close_modal = document.querySelector("dialog > svg");
-const modal = document.getElementById("popup");
+// Event Listeners for popup
 add_btn.addEventListener("click", () => {
   modal.showModal();
 });
@@ -53,8 +64,8 @@ close_modal.addEventListener("click", () => {
   modal.close();
 });
 
-const form = document.querySelector("form");
-form.addEventListener("submit", (e) => {
+// Event listener for form submit
+form.addEventListener("submit", () => {
   let form_title = document.getElementById("title");
   let form_author = document.getElementById("author");
   let form_pages = document.getElementById("num_pages");
@@ -69,5 +80,8 @@ form.addEventListener("submit", (e) => {
   form_author.value = "";
   form_pages.value = "";
   form_read_unread.checked = false;
+  localStorage.setItem("lib", JSON.stringify(lib));
+
   console.log(lib);
+  display_books();
 });
