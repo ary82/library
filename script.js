@@ -20,10 +20,6 @@ function book(title, author, pg, read) {
 
 // Add prototype functions
 book.prototype = {
-  info: function () {
-    return (this.title + " by " + this.author + ", " + this.pg + " pages, " +
-      this.read);
-  },
   addtolib: function () {
     lib.push(this);
   },
@@ -109,6 +105,7 @@ function addToggleButtonListeners() {
     });
   });
 }
+
 // Event Listeners for popup
 add_btn.addEventListener("click", () => {
   modal.showModal();
